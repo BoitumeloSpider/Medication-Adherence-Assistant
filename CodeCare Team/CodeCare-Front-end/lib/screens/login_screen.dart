@@ -3,6 +3,11 @@ import 'package:flutter_application_1/screens/forgot_screen.dart';
 import 'package:flutter_application_1/screens/main_screen.dart';
 import '../services/api_service.dart';
 import 'register_screen.dart';
+import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -11,111 +16,180 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  String? _errorMessage;
+  bool _loading = false;
 
-  bool isLoading = false;
+  Future<void> _login() async {
+    final username = _usernameController.text.trim();
+    final password = _passwordController.text;
 
-  void loginUser() async {
-    if (!_formKey.currentState!.validate()) return;
+    if (username.isEmpty || password.isEmpty) {
+      setState(() {
+        _errorMessage = "Please enter username and password";
+      });
+      return;
+    }
 
-    setState(() => isLoading = true);
+    setState(() {
+      _loading = true;
+      _errorMessage = null;
+    });
 
     try {
-      var response = await ApiService.login(
-        usernameController.text,
-        passwordController.text,
+      final response = await http.post(
+        Uri.parse('http://10.0.2.2:8080/api/users/login'), // your API endpoint
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          "username": username,
+          "password": password,
+        }),
       );
 
-      if (response["success"]) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Login successful!")),
-        );
-
-        // Navigate to main app screen (replace with your screen)
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => const MainScreen()),
-        );
+      if (response.statusCode == 200) {
+        // Assuming the API returns user info or token on success
+        Navigator.pushReplacementNamed(context, '/main');
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response["message"] ?? "Login failed")),
-        );
+        // Handle invalid credentials
+        setState(() {
+          _errorMessage = "Invalid username or password";
+        });
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Error: $e")),
-      );
+      setState(() {
+        _errorMessage = "Error connecting to server";
+      });
     } finally {
-      setState(() => isLoading = false);
+      setState(() {
+        _loading = false;
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Login")),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
+      backgroundColor: const Color(0xFF1F6F68),
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextFormField(
-                controller: usernameController,
-                decoration: const InputDecoration(
-                  labelText: "Username",
-                  prefixIcon: Icon(Icons.person),
-                  border: OutlineInputBorder(),
+              const SizedBox(height: 30),
+              Image.asset('lib/assets/front-pic.jpg', height: 180),
+              const SizedBox(height: 20),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30),
+                child: Text(
+                  'EMPOWERING WELLNESS, ONE PATIENT AT A TIME. YOUR HEALTH, OUR PRIORITY.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white, fontSize: 14, height: 1.5),
                 ),
-                validator: (value) =>
-                    value!.isEmpty ? "Enter username" : null,
               ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: passwordController,
-                decoration: const InputDecoration(
-                  labelText: "Password",
-                  prefixIcon: Icon(Icons.lock),
-                  border: OutlineInputBorder(),
+              const SizedBox(height: 30),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Column(
+                  children: [
+                    TextField(
+                      controller: _usernameController,
+                      decoration: InputDecoration(
+                        hintText: 'Email or Phone',
+                        hintStyle: const TextStyle(color: Colors.white70),
+                        prefixIcon: const Icon(Icons.person_outline, color: Colors.white70),
+                        filled: true,
+                        fillColor: Colors.transparent,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: const BorderSide(color: Colors.white70),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: const BorderSide(color: Colors.white),
+                        ),
+                      ),
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    const SizedBox(height: 15),
+                    TextField(
+                      controller: _passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        hintText: 'Password',
+                        hintStyle: const TextStyle(color: Colors.white70),
+                        prefixIcon: const Icon(Icons.lock_outline, color: Colors.white70),
+                        filled: true,
+                        fillColor: Colors.transparent,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: const BorderSide(color: Colors.white70),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: const BorderSide(color: Colors.white),
+                        ),
+                      ),
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    if (_errorMessage != null) ...[
+                      const SizedBox(height: 10),
+                      Text(
+                        _errorMessage!,
+                        style: const TextStyle(color: Colors.red, fontSize: 12),
+                      ),
+                    ]
+                  ],
                 ),
-                obscureText: true,
-                validator: (value) =>
-                    value!.isEmpty ? "Enter password" : null,
               ),
-              const SizedBox(height: 24),
-              SizedBox(
+              const SizedBox(height: 10),
+              const Text('Forgot Password?', style: TextStyle(color: Colors.white70, fontSize: 12)),
+              const SizedBox(height: 20),
+              Container(
                 width: double.infinity,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: isLoading ? null : loginUser,
-                  child: isLoading
-                      ? const CircularProgressIndicator(
-                          color: Colors.white,
-                        )
-                      : const Text("Login", style: TextStyle(fontSize: 18)),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(50), topRight: Radius.circular(50)),
                 ),
-              ),
-              const SizedBox(height: 12),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => const ForgotScreen()),
-                  );
-                },
-                child: const Text("Forgot Password or Username?"),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => const RegisterScreen()),
-                  );
-                },
-                child: const Text("Don't have an account? Register"),
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: _loading ? null : _login,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF1F6F68),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                        ),
+                        child: _loading
+                            ? const CircularProgressIndicator(color: Colors.white)
+                            : const Text('Login', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    const Text('or', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                    const SizedBox(height: 15),
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/register');
+                        },
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Color(0xFF1F6F68), width: 2),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          backgroundColor: const Color(0xFFE6F2F1),
+                        ),
+                        child: const Text(
+                          'Create an account',
+                          style: TextStyle(color: Color(0xFF1F6F68), fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

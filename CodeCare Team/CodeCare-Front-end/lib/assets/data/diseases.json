@@ -1,0 +1,176 @@
+{
+  "diseases": [
+
+    {
+      "name": "Malaria",
+      "symptoms": ["fever", "chills", "sweating", "headache"],
+      "description": "Mosquito-borne infectious disease caused by Plasmodium parasites.",
+      "advice": "Seek medical care immediately and take prescribed antimalarial medication.",
+      "prevention": "Use mosquito nets, insect repellent, and avoid mosquito bites.",
+      "severity": "high"
+    },
+
+    {
+      "name": "Common Cold",
+      "symptoms": ["runny nose", "sneezing", "cold", "sore throat"],
+      "description": "A viral infection affecting the upper respiratory tract.",
+      "advice": "Rest, drink warm fluids, and take over-the-counter cold medicine.",
+      "prevention": "Wash hands regularly and avoid close contact with sick people.",
+      "severity": "low"
+    },
+
+    {
+      "name": "Influenza",
+      "symptoms": ["flu", "fever", "body aches", "fatigue", "cough"],
+      "description": "A contagious respiratory illness caused by influenza viruses.",
+      "advice": "Rest, drink fluids, and consult a doctor if symptoms worsen.",
+      "prevention": "Get vaccinated yearly and practice good hygiene.",
+      "severity": "medium"
+    },
+
+    {
+      "name": "COVID-19",
+      "symptoms": ["covid", "coronavirus", "fever", "cough", "loss of smell"],
+      "description": "Respiratory illness caused by the SARS-CoV-2 virus.",
+      "advice": "Rest, isolate if contagious, and seek medical care if breathing problems occur.",
+      "prevention": "Vaccination, hand washing, and wearing masks in crowded areas.",
+      "severity": "high"
+    },
+
+    {
+      "name": "Tuberculosis",
+      "symptoms": ["persistent cough", "tb", "weight loss", "night sweats"],
+      "description": "Serious bacterial infection mainly affecting the lungs.",
+      "advice": "Seek medical care and complete the full TB treatment course.",
+      "prevention": "Early testing and vaccination in high-risk areas.",
+      "severity": "high"
+    },
+
+    {
+      "name": "Pneumonia",
+      "symptoms": ["chest pain", "difficulty breathing", "cough", "fever"],
+      "description": "Infection that inflames air sacs in one or both lungs.",
+      "advice": "Seek medical attention. Antibiotics may be required.",
+      "prevention": "Vaccination, hand washing, and avoiding smoking.",
+      "severity": "high"
+    },
+
+    {
+      "name": "Asthma",
+      "symptoms": ["shortness of breath", "wheezing", "chest tightness"],
+      "description": "Chronic condition that inflames and narrows the airways.",
+      "advice": "Use prescribed inhalers and avoid triggers such as smoke or dust.",
+      "prevention": "Avoid allergens and environmental triggers.",
+      "severity": "medium"
+    },
+
+    {
+      "name": "Diabetes",
+      "symptoms": ["frequent urination", "increased thirst", "high blood sugar"],
+      "description": "Chronic disease that affects how the body processes blood sugar.",
+      "advice": "Monitor blood sugar levels and follow medical treatment plans.",
+      "prevention": "Maintain a healthy weight, balanced diet, and exercise regularly.",
+      "severity": "high"
+    },
+
+    {
+      "name": "Hypertension",
+      "symptoms": ["high blood pressure", "headaches", "dizziness"],
+      "description": "A condition where blood pressure is consistently too high.",
+      "advice": "Reduce salt intake and monitor blood pressure regularly.",
+      "prevention": "Exercise, healthy diet, and stress management.",
+      "severity": "high"
+    },
+
+    {
+      "name": "Migraine",
+      "symptoms": ["severe headache", "light sensitivity", "nausea"],
+      "description": "A neurological condition causing intense headaches.",
+      "advice": "Rest in a dark room and use prescribed migraine medication.",
+      "prevention": "Avoid triggers like stress, dehydration, and lack of sleep.",
+      "severity": "medium"
+    },
+
+    {
+      "name": "Food Poisoning",
+      "symptoms": ["vomiting", "diarrhea", "stomach cramps"],
+      "description": "Illness caused by eating contaminated food.",
+      "advice": "Stay hydrated and rest. Seek medical care if severe.",
+      "prevention": "Practice safe food handling and proper cooking.",
+      "severity": "medium"
+    },
+
+    {
+      "name": "Appendicitis",
+      "symptoms": ["lower right abdominal pain", "nausea", "fever"],
+      "description": "Inflammation of the appendix that may require surgery.",
+      "advice": "Seek emergency medical treatment immediately.",
+      "prevention": "No guaranteed prevention method.",
+      "severity": "high"
+    },
+
+    {
+      "name": "Kidney Stones",
+      "symptoms": ["severe back pain", "blood in urine", "nausea"],
+      "description": "Hard deposits made of minerals and salts forming in the kidneys.",
+      "advice": "Drink plenty of water and consult a doctor for treatment.",
+      "prevention": "Stay hydrated and maintain a balanced diet.",
+      "severity": "medium"
+    },
+
+    {
+      "name": "Arthritis",
+      "symptoms": ["joint pain", "joint swelling", "stiffness"],
+      "description": "Inflammation of joints causing pain and stiffness.",
+      "advice": "Exercise gently and take medication prescribed by a doctor.",
+      "prevention": "Maintain a healthy weight and stay physically active.",
+      "severity": "medium"
+    },
+
+    {
+      "name": "Depression",
+      "symptoms": ["persistent sadness", "loss of interest", "fatigue"],
+      "description": "A mental health disorder affecting mood and daily functioning.",
+      "advice": "Seek support from a mental health professional.",
+      "prevention": "Maintain social connections and manage stress.",
+      "severity": "high"
+    },
+
+    {
+      "name": "Anxiety Disorder",
+      "symptoms": ["excessive worry", "panic attacks", "restlessness"],
+      "description": "Mental health disorder characterized by intense fear or worry.",
+      "advice": "Practice relaxation techniques and consult a professional.",
+      "prevention": "Stress management and healthy lifestyle habits.",
+      "severity": "medium"
+    },
+
+    {
+      "name": "Allergy",
+      "symptoms": ["sneezing", "itchy eyes", "rash"],
+      "description": "Immune system reaction to a foreign substance.",
+      "advice": "Avoid allergens and take antihistamines if necessary.",
+      "prevention": "Identify and avoid triggers.",
+      "severity": "low"
+    },
+
+    {
+      "name": "Eczema",
+      "symptoms": ["itchy skin", "dry patches", "red rash"],
+      "description": "Chronic condition causing inflamed, itchy skin.",
+      "advice": "Use moisturizers and avoid irritants.",
+      "prevention": "Keep skin hydrated and avoid harsh soaps.",
+      "severity": "low"
+    },
+
+    {
+      "name": "Acne",
+      "symptoms": ["pimples", "blackheads", "oily skin"],
+      "description": "Skin condition occurring when hair follicles become clogged.",
+      "advice": "Use acne treatment products and keep skin clean.",
+      "prevention": "Maintain good skincare routine.",
+      "severity": "low"
+    }
+
+  ]
+}
