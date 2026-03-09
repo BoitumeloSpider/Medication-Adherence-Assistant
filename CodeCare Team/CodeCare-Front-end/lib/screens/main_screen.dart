@@ -104,16 +104,15 @@ class MainScreen extends StatelessWidget {
                     },
                   ),
                   _FeatureCard(
-                    icon: FontAwesomeIcons.user,
+                    icon: FontAwesomeIcons.user, // pass IconData, not FaIcon widget
                     title: "Profile",
                     color: Colors.purple.shade400,
                     onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ProfileScreen()),
-                    );
-                  },
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const ProfileScreen()),
+                      );
+                    },
                   ),
                   _FeatureCard(
                     icon: FontAwesomeIcons.userNurse,

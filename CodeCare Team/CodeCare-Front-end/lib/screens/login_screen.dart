@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/forgot_screen.dart';
-import 'package:flutter_application_1/screens/main_screen.dart';
-import '../services/api_service.dart';
-import 'register_screen.dart';
-import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatefulWidget {
